@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mitose & Méiose - Guide Complet</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #ec4899;
+            --accent: #8b5cf6;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveBackground 20s linear infinite;
+        }
+
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .btn-custom {
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            border: none;
+            background: white;
+            color: var(--primary);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .content-section {
+            background: white;
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .card-custom {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+            border: none;
+        }
+
+        .card-custom:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .icon-box {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .comparison-table {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 20px;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .form-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 80px 0;
+            color: white;
+        }
+
+        .form-custom {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        .form-custom label {
+            color: var(--dark);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .form-custom .form-control, .form-custom .form-select {
+            border-radius: 10px;
+            border: 2px solid #e2e8f0;
+            padding: 12px 20px;
+            transition: all 0.3s ease;
+        }
+
+        .form-custom .form-control:focus, .form-custom .form-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 15px 50px;
+            border-radius: 50px;
+            border: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .dna-animation {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.1;
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1><i class="fas fa-dna"></i> Mitose & Méiose</h1>
+            <p>Découvrez les secrets de la division cellulaire</p>
+            <button class="btn-custom" onclick="document.getElementById('content').scrollIntoView({behavior: 'smooth'})">
+                Explorer <i class="fas fa-arrow-down"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- Definitions Section -->
+    <section class="content-section" id="content">
+        <div class="container">
+            <h2 class="section-title">Qu'est-ce que la division cellulaire ?</h2>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card-custom">
+                        <div class="icon-box">
+                            <i class="fas fa-cell"></i>
+                        </div>
+                        <h3 style="color: var(--primary); font-weight: 700;">La Mitose</h3>
+                        <p style="line-height: 1.8;">La mitose est un processus de division cellulaire qui permet à une cellule mère de produire <strong>deux cellules filles identiques</strong> génétiquement. Ce mécanisme est essentiel pour la croissance, la réparation des tissus et la reproduction asexuée chez les organismes vivants.</p>
+                        <p style="line-height: 1.8;">Résultat : <strong>2 cellules diploïdes (2n)</strong> identiques à la cellule mère.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card-custom">
+                        <div class="icon-box" style="background: linear-gradient(135deg, var(--secondary), var(--accent));">
+                            <i class="fas fa-dna"></i>
+                        </div>
+                        <h3 style="color: var(--secondary); font-weight: 700;">La Méiose</h3>
+                        <p style="line-height: 1.8;">La méiose est un processus de division cellulaire spécialisé qui produit <strong>quatre cellules filles haploïdes</strong> (gamètes) à partir d'une cellule mère diploïde. Elle comprend deux divisions successives et est indispensable à la reproduction sexuée.</p>
+                        <p style="line-height: 1.8;">Résultat : <strong>4 cellules haploïdes (n)</strong> génétiquement différentes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="content-section" style="background: #f8fafc;">
+        <div class="container">
+            <h2 class="section-title">Différences entre Mitose et Méiose</h2>
+            <div class="table-responsive comparison-table">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>Critère</th>
+                            <th><i class="fas fa-cell"></i> Mitose</th>
+                            <th><i class="fas fa-dna"></i> Méiose</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Type de cellules</strong></td>
+                            <td>Cellules somatiques (corps)</td>
+                            <td>Cellules germinales (reproductives)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nombre de divisions</strong></td>
+                            <td>Une division</td>
+                            <td>Deux divisions successives</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cellules produites</strong></td>
+                            <td>2 cellules filles</td>
+                            <td>4 cellules filles</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Matériel génétique</strong></td>
+                            <td>Diploïde (2n) → Diploïde (2n)</td>
+                            <td>Diploïde (2n) → Haploïde (n)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Identité génétique</strong></td>
+                            <td>Cellules identiques</td>
+                            <td>Cellules génétiquement variées</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fonction</strong></td>
+                            <td>Croissance, réparation, reproduction asexuée</td>
+                            <td>Production de gamètes (reproduction sexuée)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Crossing-over</strong></td>
+                            <td>Absent</td>
+                            <td>Présent (prophase I)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="form-section">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Contactez-nous</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="form-custom">
+                        <h3 style="color: var(--dark); margin-bottom: 30px; text-align: center;">
+                            <i class="fas fa-envelope"></i> Posez vos questions
+                        </h3>
+                        <form id="contactForm">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="nom" class="form-label">Nom complet *</label>
+                                    <input type="text" class="form-control" id="nom" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">Email *</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="telephone" class="form-label">Téléphone</label>
+                                    <input type="tel" class="form-control" id="telephone">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="sujet" class="form-label">Sujet *</label>
+                                    <select class="form-select" id="sujet" required>
+                                        <option value="">Choisissez un sujet</option>
+                                        <option value="mitose">Question sur la Mitose</option>
+                                        <option value="meiose">Question sur la Méiose</option>
+                                        <option value="difference">Différences Mitose/Méiose</option>
+                                        <option value="autre">Autre</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label for="message" class="form-label">Votre message *</label>
+                                    <textarea class="form-control" id="message" rows="5" required></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn-submit">
+                                        <i class="fas fa-paper-plane"></i> Envoyer le message
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p style="margin: 0;">
+                <i class="fas fa-dna"></i> Mitose & Méiose - Guide Complet © 2025
+            </p>
+            <p style="margin-top: 10px; opacity: 0.8;">
+                Explorez les merveilles de la biologie cellulaire
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Merci pour votre message ! Nous vous répondrons bientôt.');
+            this.reset();
+        });
+
+        // Animation on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease';
+                }
+            });
+        });
+
+        document.querySelectorAll('.card-custom').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
